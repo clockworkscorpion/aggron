@@ -13,8 +13,8 @@ from mapper import getPoints
 # ***********************************************************************************************************
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("start-maximized")
-chrome_options.add_argument('--user-data-dir=C:/Users/AndroidDev/AppData/Local/Google/Chrome/User Data')
-PATH = r"C:\Users\AndroidDev\Desktop\aggron\chromedriver\chromedriver.exe"
+chrome_options.add_argument('--user-data-dir=path_to_chrome_user_data')
+PATH = r"path_to_chromedriver.exe"
 pp = pprint.PrettyPrinter(indent=2)
 # *********************************************************************************************************
 
