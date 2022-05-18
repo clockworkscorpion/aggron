@@ -11,13 +11,11 @@ import pprint
 from mapper import getPoints
 
 # ***********************************************************************************************************
-# DO NOT EDIT THESE
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("start-maximized")
 chrome_options.add_argument('--user-data-dir=C:/Users/AndroidDev/AppData/Local/Google/Chrome/User Data')
 PATH = r"C:\Users\AndroidDev\Desktop\aggron\chromedriver\chromedriver.exe"
 pp = pprint.PrettyPrinter(indent=2)
-# DO NOT EDIT TILL HERE
 # *********************************************************************************************************
 
 def zomatoBuilder(restaurant, startDate, endDate):
@@ -203,14 +201,4 @@ def zomatoBuilder(restaurant, startDate, endDate):
                 closeIcon = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="modal-container"]/i')))
                 driver.execute_script("arguments[0].click();", closeIcon)
     driver.quit()
-    # print(LIST_OF_ORDERS)
-    # LIST_OF_ORDERS.sort()
-    # print(LIST_OF_ORDERS)
-    # map_of_orders.sort()
-    # list(LIST_OF_ORDERS for LIST_OF_ORDERS,_ in itertools.groupby(LIST_OF_ORDERS))
-    # list(map_of_orders for map_of_orders,_ in itertools.groupby(map_of_orders))
-    # LIST_OF_ORDERS = list(OrderedDict.fromkeys(LIST_OF_ORDERS))
-    # LIST_OF_ORDERS.sort(key = LIST_OF_ORDERS.index)
-    # b_set = set(tuple(x) for x in LIST_OF_ORDERS)
-    # LIST_OF_ORDERS = [list(x) for x in b_set]
     return LIST_OF_ORDERS, map_of_orders
