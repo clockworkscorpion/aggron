@@ -13,7 +13,6 @@ from zomato import zomatoBuilder
 from eateasy import eateasyBuilder
 
 #***********************************************************************************************************
-# DO NOT EDIT THESE
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/script.projects']
 SERVICE_ACCOUNT_FILE = 'aggronkey.json'
 creds = None
@@ -22,11 +21,10 @@ creds = service_account.Credentials.from_service_account_file(
 service = build('sheets', 'v4', credentials = creds)
 sheet = service.spreadsheets()
 
-clientsFile = 'aggron-restaurants-cdm.json'
+clientsFile = 'aggron-restaurants.json'
 f = open(clientsFile,"r")
-TEMPLATE_SHEET_ID = 99140307
+TEMPLATE_SHEET_ID = "XXXXXXXXXXXXXX"
 pp = pprint.PrettyPrinter(indent=4)
-# DO NOT EDIT TILL HERE
 # *********************************************************************************************************
 
 def getCustomerData(ListofOrders, startDate):
