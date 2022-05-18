@@ -17,8 +17,7 @@ from google.oauth2 import service_account
 from googleapiclient.http import MediaFileUpload
 
 #*******************************************************
-# DO NOT EDIT THESE
-GOOGLE_MAP_API_KEY = "AIzaSyA5Cckrv0U-78sTQwfmN0KGuNLQpRWZn6s"
+GOOGLE_MAP_API_KEY = "GMAPS_API_KEY"
 geolocator = GoogleV3(api_key=GOOGLE_MAP_API_KEY)
 pp = pprint.PrettyPrinter(indent=4)
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
@@ -27,7 +26,6 @@ creds = None
 creds = service_account.Credentials.from_service_account_file(
     SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 drive_service = build('drive', 'v3', credentials = creds)
-# DO NOT EDIT THESE
 #*******************************************************
 
 def getPoints(address):
@@ -47,42 +45,8 @@ def getPoints(address):
             long = location.longitude
     else:
         # For takeaway orders, where address is ""
-        lat = 25.28163746
-        long = 55.3977368
-    # url = "https://catalog.api.2gis.com/3.0/suggests?q="+ address +"&suggest_type=address" +"&key=ruzvys4831" +"&locale=en_AE"
-    # response_data = requests.get(url)
-    # response = response_data.json()
-    # try:
-    #     # gis2_lat = response["result"]["items"][0]["point"]["lat"]
-    #     # gis2_long = response["result"]["items"][0]["point"]["lon"]
-    #     gis2_address = response["result"]["items"][0]["address_name"]
-    # except:
-    #     # When 2GIS fails to detect a location
-    #     gis2_address = "Not Found"
-    # print("Base Address : ", address, "\n")
-    # print("+++++++++++++++++++++++++++++++++++++++++++++++++")
-    # print("2GIS Address : ", gis2_address)
-    # url = "https://catalog.api.2gis.com/3.0/items/geocode?q=" \
-    # + address \
-    # +"&fields=items.point,items.point&key=ruzvys4831"
-    # response_data = requests.get(url)
-    # response = response_data.json()
-    # try:
-    #     gis2_lat = response["result"]["items"][0]["point"]["lat"]
-    #     gis2_long = response["result"]["items"][0]["point"]["lon"]
-    #     gis2_address = response["result"]["items"][0]["address_name"]
-    # except:
-    #     # When 2GIS fails to detect a location
-    #     gis2_lat = 55
-    #     gis2_long = 55
-    #     gis2_address = "Not Found"
-    # print("Base Address : ", address, "\n")
-    # print("Google Lat: ", lat)
-    # print("Google Long: ", long)
-    # print("+++++++++++++++++++++++++++++++++++++++++++++++++")
-    # print("2GIS Lat : ", gis2_lat)
-    # print("2GIS Long : ", gis2_long)
-    # print("2GIS Address : ", gis2_address)
+        lat = 
+        long = 
     return lat, long
 
 def plot_map(restaurant, startDate, masterListofOrders = {}):
