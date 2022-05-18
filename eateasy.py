@@ -12,13 +12,11 @@ import pprint
 from mapper import getPoints
 
 # ***********************************************************************************************************
-# DO NOT EDIT THESE
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("start-maximized")
-chrome_options.add_argument('--user-data-dir=C:/Users/AndroidDev/AppData/Local/Google/Chrome/User Data')
-PATH = r"C:\Users\AndroidDev\Desktop\aggron\chromedriver\chromedriver.exe"
+chrome_options.add_argument('--user-data-dir=path_to_chrome_user_data')
+PATH = r"path_to_chromedriver.exe"
 pp = pprint.PrettyPrinter(indent=2)
-# DO NOT EDIT TILL HERE
 # *********************************************************************************************************
 
 def eateasyBuilder(restaurant, startDate, endDate):
@@ -80,7 +78,6 @@ def eateasyBuilder(restaurant, startDate, endDate):
                 driver.execute_script("window.open('');")
                 driver.switch_to.window(driver.window_handles[-1])
                 driver.get(link)
-                # NEW TAB COMMANDS
                 # CUSTOMER PERSONAL INFO
                 customerPersonal = driver.find_element_by_xpath('//*[@id="content"]/div[4]/h2[1]').text
                 CUSTOMER_PHONE = re.findall(r"\((.*?)\)", customerPersonal)[0].replace(" ","")
@@ -102,8 +99,6 @@ def eateasyBuilder(restaurant, startDate, endDate):
                     DRIVER_PHONE = driverDetails[1]
                 except NoSuchElementException:
                     ORDER_DELIVERY_MODE = "Takeout"
-                # if ORDER_DELIVERY_MODE=="Delivery":
-                #     BILL_AMOUNT = BILL_AMOUNT# - 7
                 # ITEM DETAILS
                 items = driver.find_elements_by_class_name("odd") + driver.find_elements_by_class_name("even")
                 orderItems = [[element.text for element in item.find_elements_by_tag_name('td')] for item in items]
@@ -122,33 +117,31 @@ def eateasyBuilder(restaurant, startDate, endDate):
                 else:
                     PAYMENT_TYPE = "COD"
                 CUSTOMER_INSTRUCTIONS = ''
-                # # GET ADDRESS IF AVAILABLE
-                # if len(driverDetails) != 0:
-                #     DRIVER_NAME = driverDetails[0]
-                #     DRIVER_PHONE = "+" + driverDetails[1]
-                #     driver.execute_script("window.open('');")
-                #     driver.switch_to.window(driver.window_handles[-1])
-                #     driver.get(driverLink)
-                #     if "careem" in driverLink:
-                #         CUSTOMER_ADDRESS = str(driver.find_element_by_id("dropoff_content").text.replace("#floor/room:",""))
-                #     elif "quikup" in driverLink:
-                #         waypoint = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.CLASS_NAME, 'waypoint-marker-header')))
-                #         waypoint.click()
-                #         address = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.CLASS_NAME, 'leaflet-popup-content')))
-                #         CUSTOMER_ADDRESS = str(driver.find_element_by_class_name("leaflet-popup-content").text)
-                #     else:
-                #         print("No driver")
-                #     if CUSTOMER_ADDRESS == '' or CUSTOMER_ADDRESS is None:
-                #         CUSTOMER_ADDRESS = LOCALITY
-                #     driver.close()
-                #     driver.switch_to.window(driver.window_handles[1])
+                # GET ADDRESS IF AVAILABLE
+                if len(driverDetails) != 0:
+                    DRIVER_NAME = driverDetails[0]
+                    DRIVER_PHONE = "+" + driverDetails[1]
+                    driver.execute_script("window.open('');")
+                    driver.switch_to.window(driver.window_handles[-1])
+                    driver.get(driverLink)
+                    if "careem" in driverLink:
+                        CUSTOMER_ADDRESS = str(driver.find_element_by_id("dropoff_content").text.replace("#floor/room:",""))
+                    elif "quikup" in driverLink:
+                        waypoint = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.CLASS_NAME, 'waypoint-marker-header')))
+                        waypoint.click()
+                        address = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.CLASS_NAME, 'leaflet-popup-content')))
+                        CUSTOMER_ADDRESS = str(driver.find_element_by_class_name("leaflet-popup-content").text)
+                    else:
+                        print("No driver")
+                    if CUSTOMER_ADDRESS == '' or CUSTOMER_ADDRESS is None:
+                        CUSTOMER_ADDRESS = LOCALITY
+                    driver.close()
+                    driver.switch_to.window(driver.window_handles[1])
                 CUSTOMER_ADDRESS = CUSTOMER_ADDRESS.replace('"', "").replace("'","").replace("\n","")
                 ORDER_PLATFORM = "Smiles"
                 coords = getPoints(CUSTOMER_ADDRESS)
                 ORDER_LATITUDE = coords[0]
                 ORDER_LONGITUDE = coords[1]
-                # GIS2_LATITUDE = coords[2]
-                # GIS2_LONGITUDE = coords[3]
                 new_order = {
                     ORDER_ID : {
                         "platform": ORDER_PLATFORM,
